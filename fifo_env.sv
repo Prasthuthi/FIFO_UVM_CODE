@@ -1,7 +1,7 @@
 //environment
  
 
-class f_env extends uvm_env;
+class fifo_env extends uvm_env;
   fifo_agent f_agt;
   fifo_scoreboard f_scb;
   `uvm_component_utils(fifo_env)
