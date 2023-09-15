@@ -1,5 +1,7 @@
 //interface
-
+import uvm_pkg::*;
+`include "uvm_macros.svh"
+`timescale 1ns/10ps
 
 interface fifo_interface(input clk, rstn);
   bit i_wren;
