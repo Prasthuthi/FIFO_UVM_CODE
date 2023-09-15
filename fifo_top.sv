@@ -1,11 +1,12 @@
- //top
-    
-    
-    
-    
-    
+import uvm_pkg::*;
+`include "uvm_macros.svh"
+`include "fifo_interface.sv"
+`include "fifo_test.sv"
+`include "fifo_dut.sv"
 
-module tb;
+  //top
+    
+module testbench;
   bit clk;
   bit rstn;
   
@@ -18,7 +19,7 @@ module tb;
     rstn = 0;
   end
   
-  fifo_interface tif (clk, reset);
+  fifo_interface tif (clk, rstn);
   
  sync_fifo dut(.clk(tif.clk),
                .rstn(tif.rstn),
@@ -27,6 +28,8 @@ module tb;
                .i_rden(tif. i_rden),
                .o_full(tif.o_full),
                .o_empty(tif.o_empty),
+               .o_alm_full(tif.o_alm_full),
+               .o_alm_empty(tif.o_alm_empty),
                .o_rddata(tif.o_rddata));
   
   initial begin
