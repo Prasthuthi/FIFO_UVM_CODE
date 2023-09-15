@@ -1,5 +1,6 @@
 //environment
- 
+ `include "fifo_agent.sv"
+`include "fifo_scoreboard.sv"
 
 class fifo_env extends uvm_env;
   fifo_agent f_agt;
