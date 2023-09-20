@@ -1,7 +1,4 @@
-//scoreboard
-    
-    
-    
+
      class fifo_scoreboard extends uvm_scoreboard;
        uvm_analysis_imp#(fifo_seq_item , fifo_scoreboard) item_got_export;
        `uvm_component_utils(fifo_scoreboard)
@@ -49,7 +46,7 @@
       if(queue.size() >= 'd1)begin
         counter= counter-1;
         examdata = queue.pop_front();
-        `uvm_info("Read Data", $sformatf("examdata: %0h o_rddata: %0h o_empty: %0b  o_alm_empty", examdata, item_got.o_rddata, item_got.o_empty , item_got.o_alm_empty), UVM_LOW);
+        `uvm_info("Read Data", $sformatf("examdata: %0h o_rddata: %0h o_empty: %0b  o_alm_empty: %0b", examdata, item_got.o_rddata, item_got.o_empty , item_got.o_alm_empty), UVM_LOW);
         if(examdata == item_got.o_rddata)begin
           $display("-------- 		Pass! 		--------");
         end
@@ -70,7 +67,7 @@
             $display("No match");
               counter= counter-1;
         examdata = queue.pop_front();
-        `uvm_info("Read Data", $sformatf("examdata: %0h o_rddata: %0h o_empty: %0b  o_alm_empty", examdata, item_got.o_rddata, item_got.o_empty , item_got.o_alm_empty), UVM_LOW);
+             `uvm_info("Read Data", $sformatf("examdata: %0h o_rddata: %0h o_empty: %0b  o_alm_empty: %0b", examdata, item_got.o_rddata, item_got.o_empty , item_got.o_alm_empty), UVM_LOW);
            if(examdata == item_got.o_rddata)begin
           $display("-------- 		Pass! 		--------");
         end
