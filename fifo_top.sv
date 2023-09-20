@@ -2,11 +2,9 @@ import uvm_pkg::*;
 `include "uvm_macros.svh"
 `include "fifo_interface.sv"
 `include "fifo_test.sv"
-`include "fifo_dut.sv"
+`include "my_fifo.sv"
 
-  //top
-    
-module testbench;
+module fifo_top;
   bit clk;
   bit rstn;
   
@@ -14,18 +12,18 @@ module testbench;
   
   initial begin
     clk = 1;
-    rstn = 1;
-    #5;
     rstn = 0;
+    #5;
+    rstn = 1;
   end
   
-  fifo_interface tif (clk, rstn);
+  fifo_interface tif(clk, rstn);
   
- sync_fifo dut(.clk(tif.clk),
+  my_fifo dut(.clk(tif.clk),
                .rstn(tif.rstn),
                .i_wrdata(tif.i_wrdata),
                .i_wren(tif.i_wren),
-               .i_rden(tif. i_rden),
+               .i_rden(tif.i_rden),
                .o_full(tif.o_full),
                .o_empty(tif.o_empty),
                .o_alm_full(tif.o_alm_full),
@@ -33,12 +31,13 @@ module testbench;
                .o_rddata(tif.o_rddata));
   
   initial begin
-   uvm_config_db#(virtual fifo_interface)::set(null, "", "vif", tif);
-    $dumpfile("dump.vcd"); 
-    $dumpvars;
-   run_test("fifo_test");
+    uvm_config_db#(virtual fifo_interface)::set(null, "", "vif", tif);
+     run_test("fifo_test");
   end
   initial begin
- #1500 $finish ;
+    $dumpfile("dump.vcd"); 
+    $dumpvars;
+   
   end
+  
 endmodule
